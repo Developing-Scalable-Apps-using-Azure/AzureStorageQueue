@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "extensions": {
+    "queues": {
+      "maxDequeueCount": 2,
+      "messageEncoding": "base64"
+    }
+  },
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    }
+  }
+}
