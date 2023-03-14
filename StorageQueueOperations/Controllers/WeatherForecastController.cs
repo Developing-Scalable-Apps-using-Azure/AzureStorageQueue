@@ -1,6 +1,7 @@
-﻿using Azure.Storage.Queues;
+using Azure.Storage.Queues;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using StorageQueueOperations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,16 +43,16 @@ namespace AzureQueueDemo01.Controllers
 
         [HttpPost]
         [Route("/")]
-        public async Task post([FromBody]WeatherForecast data)
+        public async Task post([FromBody] WeatherForecast data)
         {
-            /*var conn = "DefaultEndpointsProtocol=https;AccountName=ibsa01;AccountKey=87hgTg8Fkev8pHMGSP6OL7BO7sbjdGPo2bZOt2dK9ZLtFGYGMpIb+Hk/SokYZ2a8Olo9Bnbvw2uGkM5LjcOYAw==;EndpointSuffix=core.windows.net";
+            /*var conn = "DefaultEndpointsProtocol=https;AccountName=ibstrg01;AccountKey=xDlnVUK0yKgnSItLbvTWewWh6OjfNuZjRlbFlZFgRLgWePYaKGSRivIF9eYiLcMzw11lVmCudpr4+AStDhqOVA==;EndpointSuffix=core.windows.net";
             var queueName = "ibqueue";
             var queueClient = new QueueClient(conn, queueName);*/
             var message = JsonSerializer.Serialize(data);
             //await queueClient.SendMessageAsync(message, null, TimeSpan.FromSeconds(10)); //time to live = expiry time
             //await queueClient.SendMessageAsync(message, TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20)); //visibility timeout
             //await queueClient.SendMessageAsync(message, null, TimeSpan.FromSeconds(-1)); // -ve value = no expiry
-            await _queueClient.SendMessageAsync(message, null, TimeSpan.FromSeconds(10));
+            await _queueClient.SendMessageAsync(message, null, TimeSpan.FromSeconds(-1));
 
         }
     }
